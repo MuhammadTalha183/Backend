@@ -18,3 +18,19 @@ const pool = new Pool({
         rejectUnauthorized: false
     }
 });
+
+// new url for testing
+app.get('/api/data', async (req, res) => {
+    try {
+        const client = await pool.connect();
+        const result = await client.query('SELECT * FROM your_table_name');
+        
+        res.json(result.rows);
+        client.release();
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error fetching data from database');
+    }
+});
+
+const PORT = process.env.PORT || 3000;

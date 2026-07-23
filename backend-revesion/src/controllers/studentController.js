@@ -1,6 +1,6 @@
 
 import pool from "../../config/db.js";
-const getStudentAllStudents = async (req , res)=>{
+export const getAllStudents = async (req , res)=>{
   try {
     const result = await pool.query("select * from students");
     res.json(result.rows)

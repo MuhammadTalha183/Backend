@@ -26,3 +26,20 @@ export const getStudentByID = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+
+// delete the specic sstudent 
+export const deleteStudent = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query
+("DELETE FROM students WHERE id = $1 RETURNING *", [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+    res.json({ message: "Student deleted successfully", student: result.rows[0] });
+  } catch (error) { 
+    console.error("Error deleting student", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}

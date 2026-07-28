@@ -26,6 +26,20 @@ export const getStudentByID = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+//  post request to register the students
+export const regiserStudent = async (req , res) => {
+  const {id , fullname , email , phone , course , gender } = req.body;
+  try {
+    const result = await pool.query(
+      "INSERT INTO students (id, fullname, email , phone , course , gender) values ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [id, fullname, email, phone ,course ,gender]
+    );
+    res.status(201).json({ message: "Student registered successfully", student: result.rows[0] });
+  } catch (error) {
+    console.error("Error registering student", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
 
 
 // delete the specic sstudent 

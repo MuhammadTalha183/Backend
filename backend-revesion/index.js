@@ -8,6 +8,8 @@ const app = express();
 //   res.send("Hello World");
 // });
 
+// 🟢 ADD THIS LINE BEFORE YOUR ROUTES
+app.use(express.json()); 
 app.use("/students", studentRouter);
 
 //  dynamic student route use 

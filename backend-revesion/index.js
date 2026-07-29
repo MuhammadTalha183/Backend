@@ -12,13 +12,6 @@ const app = express();
 app.use(express.json()); 
 app.use("/students", studentRouter);
 
-//  dynamic student route use 
-app.use("/students/:id", getStudentByID);
-// Delete the specfic student route use
-app.use("/studentsDelete/:id", deleteStudent);
-
-// register the student route use
-app.use("/students/register", regiserStudent);
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });

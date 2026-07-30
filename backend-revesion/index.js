@@ -4,11 +4,6 @@ import studentRouter from "./src/routes/studentRoutes.js";
 import { getStudentByID , deleteStudent , regiserStudent} from "./src/controllers/studentController.js";
 const app = express();
 
-// app.get("/", (req, res) => {
-//   res.send("Hello World");
-// });
-
-// 🟢 ADD THIS LINE BEFORE YOUR ROUTES
 app.use(express.json()); 
 app.use("/students", studentRouter);
 
